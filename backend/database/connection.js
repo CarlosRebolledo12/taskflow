@@ -1,10 +1,11 @@
 // backend/database/connection.js
-
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  uri: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } // Railway requiere SSL
+  host: 'localhost',
+  user: 'root',
+  password: '', // Cambia si tienes contraseña
+  database: 'taskflow_db'
 });
 
 connection.connect(err => {
@@ -12,7 +13,7 @@ connection.connect(err => {
     console.error('❌ Error al conectar a MySQL:', err);
     return;
   }
-  console.log('✅ Conexión a MySQL en Railway exitosa');
+  console.log('✅ Conexión a MySQL exitosa');
 });
 
 module.exports = connection;

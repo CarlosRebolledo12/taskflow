@@ -1,3 +1,4 @@
+// backend/models/user.js
 const connection = require('../database/connection');
 
 const createUser = (name, email, hashedPassword, callback) => {

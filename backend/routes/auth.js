@@ -1,3 +1,4 @@
+// backend/routes/auth.js
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -9,7 +10,7 @@ router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  createUser(name, email, hashedPassword, (err, result) => {
+  createUser(name, email, hashedPassword, (err) => {
     if (err) return res.status(400).json({ message: 'Error al registrar' });
     res.status(201).json({ message: 'Usuario creado' });
   });
