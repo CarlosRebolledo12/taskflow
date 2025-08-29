@@ -2,7 +2,6 @@
 
 const mysql = require('mysql2');
 
-// Usa la variable de entorno
 const connection = mysql.createConnection({
   uri: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false } // Railway requiere SSL
