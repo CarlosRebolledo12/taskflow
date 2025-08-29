@@ -1,15 +1,19 @@
+// backend/database/connection.js
+
 const mysql = require('mysql2');
 
+// Usa la variable de entorno
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '', // Cambia si tienes contraseña
-  database: 'taskflow_db'
+  uri: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Railway requiere SSL
 });
 
 connection.connect(err => {
-  if (err) throw err;
-  console.log('✅ Conexión a MySQL exitosa');
+  if (err) {
+    console.error('❌ Error al conectar a MySQL:', err);
+    return;
+  }
+  console.log('✅ Conexión a MySQL en Railway exitosa');
 });
 
 module.exports = connection;

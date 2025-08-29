@@ -6,25 +6,18 @@ const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middlewares
 app.use(express.json());
 
 // Servir archivos estáticos (frontend)
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// === RUTAS API ===
-// Importantes: Usar rutas explícitas y con barra final si es necesario
+// Rutas API
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
-app.use('/api/auth', authRoutes);           // ✅ Correcto
-app.use('/api/tasks/', taskRoutes);         // ✅ Con barra final para evitar parsing erróneo
-
-// === SPA: Sirve index.html para rutas no-API ===
-app.get('/api/*', (req, res) => {
-  res.status(404).json({ message: 'Ruta API no encontrada' });
-});
-
+// SPA: Sirve index.html para cualquier otra ruta
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
