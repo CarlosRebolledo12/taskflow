@@ -14,7 +14,9 @@ CREATE TABLE tasks (
   user_id INT NOT NULL,
   title VARCHAR(200) NOT NULL,
   description TEXT,
-  completed BOOLEAN DEFAULT FALSE,
+  due_date DATE NULL,
+  priority VARCHAR(10) DEFAULT 'media',
+  status VARCHAR(20) DEFAULT 'pendiente',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );

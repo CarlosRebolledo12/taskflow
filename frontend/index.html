@@ -3,35 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TaskFlow</title>
+  <title>TaskFlow - Gestor de Tareas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Pantalla de Login -->
   <div class="container" id="login-container">
-    <h1>Iniciar Sesión</h1>
-    <input type="email" id="email" placeholder="Correo" required />
+    <h1 class="title">TASKFLOW</h1>
+    <h2 class="subtitle">Iniciar Sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" required />
     <input type="password" id="password" placeholder="Contraseña" required />
-    <button onclick="login()">Iniciar Sesión</button>
-    <p>No tienes cuenta? <a href="#" onclick="showRegister()">Regístrate</a></p>
+    <button onclick="login()" class="btn-primary">Iniciar Sesión</button>
+    <p><a href="#" onclick="showRegister()">Regístrate</a></p>
   </div>
 
+  <!-- Pantalla de Registro -->
   <div class="container hidden" id="register-container">
-    <h1>Registrarse</h1>
-    <input type="text" id="name" placeholder="Nombre" required />
-    <input type="email" id="regEmail" placeholder="Correo" required />
+    <h1 class="title">TASKFLOW</h1>
+    <h2 class="subtitle">Crear Cuenta</h2>
+    <input type="text" id="name" placeholder="Nombre completo" required />
+    <input type="email" id="regEmail" placeholder="Correo electrónico" required />
     <input type="password" id="regPassword" placeholder="Contraseña" required />
-    <button onclick="register()">Registrar</button>
+    <button onclick="register()" class="btn-primary">Registrar</button>
     <p><a href="#" onclick="showLogin()">Volver al login</a></p>
   </div>
 
-  <div class="container hidden" id="tasks-container">
-    <h1>Bienvenido, <span id="userName"></span>!</h1>
-    <button onclick="logout()">Cerrar sesión</button>
-    <h2>Tus Tareas</h2>
-    <input type="text" id="taskTitle" placeholder="Título de la tarea" />
-    <textarea id="taskDesc" placeholder="Descripción"></textarea>
-    <button onclick="createTask()">Crear Tarea</button>
-    <ul id="taskList"></ul>
+  <!-- Dashboard de Tareas -->
+  <div class="dashboard hidden" id="tasks-container">
+    <header class="header">
+      <h1 class="title">Bienvenido, <span id="userName"></span>!</h1>
+      <button onclick="logout()" class="btn-logout">Cerrar sesión</button>
+    </header>
+
+    <div class="task-form">
+      <input type="text" id="taskTitle" placeholder="Título de la tarea" />
+      <textarea id="taskDesc" placeholder="Descripción (opcional)"></textarea>
+      <input type="date" id="taskDueDate" />
+      <select id="taskPriority">
+        <option value="baja">Baja</option>
+        <option value="media" selected>Media</option>
+        <option value="alta">Alta</option>
+      </select>
+      <select id="taskStatus">
+        <option value="pendiente">Pendiente</option>
+        <option value="en_proceso">En Proceso</option>
+        <option value="completada">Completada</option>
+      </select>
+      <button onclick="createTask()" class="btn-primary">+ Añadir Tarea</button>
+    </div>
+
+    <div class="task-board">
+      <div class="column">
+        <h3>📋 Pendientes</h3>
+        <ul id="pending-list"></ul>
+      </div>
+      <div class="column">
+        <h3>🔄 En Proceso</h3>
+        <ul id="in-progress-list"></ul>
+      </div>
+      <div class="column">
+        <h3>✅ Completadas</h3>
+        <ul id="completed-list"></ul>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
